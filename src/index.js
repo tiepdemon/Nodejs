@@ -4,14 +4,17 @@ const handlebars = require('express-handlebars');
 const path = require('path');
 // const newController = require('New')
 
-const app = express();  
-const port = 3000  
+const route = require('./routes');
+const db = require('./config/db');
 
-const route = require('./routes')
+db.connect(); // connect to db
+
+const app = express();  
+const port = 3000;
 
 app.use(express.static(path.join(__dirname,'public')));  
 
-const viewsPath = path.join(__dirname, '/resources/views'); 
+const viewsPath = path.join(__dirname, 'resources','views'); 
 
 app.engine('hbs',  handlebars.engine({extname: ".hbs"}));  
 app.set('view engine','hbs');  
